@@ -24,9 +24,21 @@ namespace SEPGroup4App.Controllers
         }
 
         [HttpPost]
-        public ActionResult Section1(ApplicantDetailsViewModel model)
+        public ActionResult ApplicantDetails(ApplicantDetailsViewModel model)
         {
             return RedirectToAction("Section2");
+        }
+
+        public ActionResult TravelDetails()
+        {
+            TravelDetailsViewModel model = new TravelDetailsViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult TravelDetails(TravelDetailsViewModel model)
+        {
+            return View(model);
         }
     }
 }
