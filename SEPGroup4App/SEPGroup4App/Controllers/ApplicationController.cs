@@ -28,5 +28,11 @@ namespace SEPGroup4App.Controllers
         {
             return RedirectToAction("Section2");
         }
+
+        public ActionResult FundingDetails()
+        {
+            FundingDetailsViewModel model = new FundingDetailsViewModel();
+            return View(model);
+        }
     }
 }
