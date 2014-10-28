@@ -12,8 +12,6 @@ namespace SEPGroup4App.ViewModels
 
     public class ApplicantDetailsViewModel
     {
-        //[Display(Name="Call this matt")]
-        [Required]
         public int? ApplicationId { get; set; }
 
         [Display(Name="First Name")]

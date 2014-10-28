@@ -12,7 +12,7 @@ namespace SEPGroup4App.Controllers
         // GET: Application
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("ApplicantDetails");
         }
 
         public ActionResult ApplicantDetails()
@@ -26,7 +26,7 @@ namespace SEPGroup4App.Controllers
         [HttpPost]
         public ActionResult ApplicantDetails(ApplicantDetailsViewModel model)
         {
-            return RedirectToAction("Section2");
+            return RedirectToAction("TravelDetails");
         }
 
         public ActionResult TravelDetails()
@@ -37,6 +37,20 @@ namespace SEPGroup4App.Controllers
 
         [HttpPost]
         public ActionResult TravelDetails(TravelDetailsViewModel model)
+        {
+            return RedirectToAction("FundingDetails");
+        }
+
+        public ActionResult FundingDetails()
+        {
+            // Get data from database
+
+            FundingDetailsViewModel model = new FundingDetailsViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult FundingDetails(FundingDetailsViewModel model)
         {
             return View(model);
         }
