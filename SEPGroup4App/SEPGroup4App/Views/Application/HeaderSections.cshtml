@@ -1,0 +1,41 @@
+﻿@model HeaderSections
+
+@helper IsActive(HeaderSections section)
+{
+    if(Model ==  section)
+    {
+        @:class="active-page-header"
+    }
+}
+
+<div class="col-md-12">
+    <div class="page-header-group">
+        <div @IsActive(HeaderSections.ApplicantDetails)>
+            <div class="page-header">
+                1. Applicant Details
+            </div>
+            <div class="triangle-right">
+                <div class="inner"></div>
+                <div class="outer"></div>
+            </div>
+        </div>
+        <div @IsActive(HeaderSections.TravelDetails)>
+            <div class="page-header">
+                2. Travel Details
+            </div>
+            <div class="triangle-right">
+                <div class="inner"></div>
+                <div class="outer"></div>
+            </div>
+        </div>
+        <div @IsActive(HeaderSections.FundingDetails)>
+            <div class="page-header">
+                3. Funding Details
+            </div>
+            <div class="triangle-right">
+                <div class="inner"></div>
+                <div class="outer"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 90px;
     padding-bottom: 20px;
 }
 
@@ -19,10 +19,109 @@
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
-textarea {
-    max-width: 280px;
+.date {
+    max-width: 360px;
 }
 
+textarea {
+    max-width: none;
+    min-height: 100px;
+}
+
+/* Styles for the progress bars on application */
 .tab-content {
     margin-top: 20px;
+}
+
+.page-header-group {
+    display: table;
+    width: 645px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    white-space: nowrap;
+}
+
+.page-header-group > div {
+    display: inline-table;
+}
+
+.page-header-group > div:first-child > .page-header {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+.page-header-group > div {
+    width: 45%;
+}
+
+.page-header-group > div:nth-child(1) {
+    position: relative;
+    left: 0;
+    z-index: 1;
+    width: 40%
+}
+
+.page-header-group > div:nth-child(2) {
+    position: relative;
+    left: -16%;
+    z-index: 0;
+}
+
+.page-header-group > div:nth-child(3) {
+    position: relative;
+    left: -32%;
+    z-index: -1;
+}
+    
+.page-header {
+    display: table-cell;
+    text-align:right;
+    vertical-align: middle;
+    width: 100%;
+    height: 101px;
+    color: white;
+    background-color: #428bca;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.active-page-header .page-header {
+    background-color: white;
+    color: black;
+}
+
+.active-page-header .triangle-right > .inner {
+    border-left: 47.5px solid white;
+}
+
+.triangle-right > .inner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0;
+    height: 0;
+    margin-top: 2.5px;
+    border-top: 47.5px solid transparent;
+    border-left: 47.5px solid #428bca;
+    border-bottom: 47.5px solid transparent;
+    z-index: 10;
+}
+
+.triangle-right > .outer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-left: 50px solid black;
+    border-bottom: 50px solid transparent;
+}
+
+.triangle-right {
+    position: relative;
+    width: 100px;
+    height: 100px;
 }
