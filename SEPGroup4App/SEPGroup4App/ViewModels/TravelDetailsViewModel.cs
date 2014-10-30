@@ -75,7 +75,7 @@ namespace SEPGroup4App.ViewModels
         [Display(Name = "Title of Paper")]
         public string PaperTitle { get; set; }
         [Display(Name = "Paper Accepted")]
-        public bool? PaperAccepted { get; set; }
+        public bool PaperAccepted { get; set; }
         [Display(Name = "Attached Documents")]
         public AttachedDocuments? AttachedDocuments { get; set; }
         [Display(Name = "HERDC Points Awarded?")]
