@@ -19,7 +19,7 @@ namespace SEPGroup4App.Models
         public virtual DbSet<ApplicantDetails> ApplicantDetails { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<FundingDetails> FundingDetails { get; set; }
-        //public virtual DbSet<TravelDetails> TravelDetails { get; set; }
+        public virtual DbSet<TravelDetails> TravelDetails { get; set; }
     }
 
 }
