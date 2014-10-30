@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using SEPGroup4App.Models;
 
 namespace SEPGroup4App.ViewModels
 {
-    public enum Stage
-    {
-        Stage1,Stage2,Stage3
-    }
     public class FundingDetailsViewModel
     {
         //Research information
@@ -18,9 +15,9 @@ namespace SEPGroup4App.ViewModels
         [Display(Name="Are you a research Student?")]
         public bool? ResearchStudent { get; set;}
         [Display(Name="Research Strength:")]
-        public string ResearchStrength { get; set;}
-        [Display(Name="Support for strength?")]
         [DataType(DataType.MultilineText)]
+        public string ResearchStrength { get; set;}
+        [Display(Name="Is there support for the research strength?")]
         public bool? StrengthSupport { get; set;}
         [Display(Name="Stage:")]
         public Stage? stage { get; set;}
@@ -28,23 +25,25 @@ namespace SEPGroup4App.ViewModels
         public bool? SupervisorGrant { get; set;}
         [Display(Name="Have you applied to VC Conference fund?")]
         public bool? AppliedtoVCFund { get; set;}
+        [Display(Name = "Amount granted from VC conference fund")]
+        public decimal? VCFundGrantAmount { get; set; }
 
         //Funding information
         [Display(Name = "Air Fare Costs")]
-        public double? Airfare { get; set; }
+        public decimal? Airfare { get; set; }
         [Display(Name = "Accomodation Costs")]
-        public double? Accomodation { get; set; }
+        public decimal? Accomodation { get; set; }
         [Display(Name = "Conference Fees")]
-        public double? ConferenceFees { get; set; }
+        public decimal? ConferenceFees { get; set; }
         [Display(Name = "Meals costs")]
-        public double? Meals { get; set; }
+        public decimal? Meals { get; set; }
         [Display(Name = "Local Fares")]
-        public double? LocalFares { get; set; }
+        public decimal? LocalFares { get; set; }
         [Display(Name = "Car Mileage")]
-        public double? CarMileage { get; set; }
+        public decimal? CarMileage { get; set; }
         [Display(Name = "Other Costs")]
-        public double? Other { get; set; }
+        public decimal? Other { get; set; }
         [Display(Name = "Total Expenses")]
-        public double? TotalExpenses { get; set; }
+        public decimal? TotalExpenses { get; set; }
     }
 }
