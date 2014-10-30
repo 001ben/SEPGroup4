@@ -8,15 +8,39 @@ using System.Web;
 
 namespace SEPGroup4App.Models
 {
+    public enum PaperType
+    {
+        ConferencePaper, JournalPaper
+    }
+
+    public enum ConferenceQuality
+    {
+        A, B, Other
+    }
+
+    public enum SpecialDuties
+    {
+        SpecialInvitation, AboveJustPresenting
+    }
+
+    // http://stackoverflow.com/questions/1030090/how-do-you-pass-multiple-enum-values-in-c
+    [Flags]
+    public enum AttachedDocuments
+    {
+        ConferenceEmail = 1,
+        PeerReviews = 2,
+        PaperCopy = 4
+    }
+
     public class TravelDetails
     {
         //Properties
 
         //ID
         [Key, ForeignKey("Application"), DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ApplicantID { get; set; }
+        public int ApplicantionID { get; set; }
 
-        #region Depature Info
+        #region Departure Info
         //Holds basic travel details
         public PaperType? PaperType { get; set; }
         public DateTime? DepartureDate { get; set; }

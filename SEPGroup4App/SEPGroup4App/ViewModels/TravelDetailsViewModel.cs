@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SEPGroup4App.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,30 +7,7 @@ using System.Web;
 
 namespace SEPGroup4App.ViewModels
 {
-    public enum PaperType 
-    {
-        ConferencePaper, JournalPaper
-    }
-
-    public enum ConferenceQuality
-    {
-        A, B, Other
-    }
-
-    public enum SpecialDuties
-    {
-        SpecialInvitation, AboveJustPresenting
-    }
-
-    // http://stackoverflow.com/questions/1030090/how-do-you-pass-multiple-enum-values-in-c
-    [Flags]
-    public enum AttachedDocuments
-    {
-        ConferenceEmail = 1, 
-        PeerReviews = 2, 
-        PaperCopy = 4
-    }
-
+ 
     public class TravelDetailsViewModel
     {
         // Travel Information
