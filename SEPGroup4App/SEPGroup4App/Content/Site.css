@@ -59,7 +59,7 @@ textarea {
     position: relative;
     left: 0;
     z-index: 1;
-    width: 40%
+    width: 35%
 }
 
 .page-header-group > div:nth-child(2) {
@@ -78,13 +78,15 @@ textarea {
     display: table-cell;
     text-align:right;
     vertical-align: middle;
+    padding-top: 8px;
+    padding-right: 15px;
     width: 100%;
-    height: 101px;
+    height: 52px;
     color: white;
     background-color: #428bca;
-    border-left: 2px solid black;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
+    border-left: 1px solid #aaa;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
 }
 
 .active-page-header .page-header {
@@ -99,29 +101,38 @@ textarea {
 .triangle-right > .inner {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: -2px;
     width: 0;
     height: 0;
-    margin-top: 2.5px;
-    border-top: 47.5px solid transparent;
+    border-top: 26px solid transparent;
     border-left: 47.5px solid #428bca;
-    border-bottom: 47.5px solid transparent;
-    z-index: 10;
+    border-bottom: 26px solid transparent;
+    z-index: -9;
 }
 
 .triangle-right > .outer {
+    z-index: -10;
     position: absolute;
     top: 0px;
     left: 0px;
     width: 0;
     height: 0;
-    border-top: 50px solid transparent;
-    border-left: 50px solid black;
-    border-bottom: 50px solid transparent;
+    border-top: 26px solid transparent;
+    border-left: 47.5px solid #aaa;
+    border-bottom: 26px solid transparent;
 }
 
 .triangle-right {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 47.5px;
+    height: 50px;
+}   
+
+.navbar-inverse  {
+    background-color: #00749b;
+    border-color: #00749b;
+}
+
+.navbar-brand, .navbar-nav>li>a {
+    color: white !important;   
 }
