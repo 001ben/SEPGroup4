@@ -8,6 +8,11 @@ using System.Web;
 
 namespace SEPGroup4App.Models
 {
+    public enum ApplicantType
+    {
+        ResearchStudent = 0, Staff = 1
+    }
+
     public class ApplicantDetails
     {
         [Key, ForeignKey("Application"), DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -19,8 +24,9 @@ namespace SEPGroup4App.Models
         public string Supervisor { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        
         public ApplicantType? ApplicantType { get; set; }
-        public bool? FirstApplicationThisYear { get; set; }
+        public bool FirstApplicationThisYear { get; set; }
 
         [Required]
         public virtual Application Application { get; set; }

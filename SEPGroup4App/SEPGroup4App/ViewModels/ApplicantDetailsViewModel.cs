@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SEPGroup4App.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,10 +7,6 @@ using System.Web;
 
 namespace SEPGroup4App.ViewModels
 {
-    public enum ApplicantType {
-        ResearchStudent = 0, Staff = 1
-    }
-
     public class ApplicantDetailsViewModel
     {
         public int? ApplicationId { get; set; }
@@ -27,6 +24,6 @@ namespace SEPGroup4App.ViewModels
         [Display(Name = "Application Type")]
         public ApplicantType? ApplicantType { get; set; }
         [Display(Name = "Is this your first application this year?")]
-        public bool? FirstApplicationThisYear { get; set; }
+        public bool FirstApplicationThisYear { get; set; }
     }
 }

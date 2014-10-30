@@ -20,7 +20,7 @@ namespace SEPGroup4App.ViewModels
         [Display(Name="Is there support for the research strength?")]
         public bool? StrengthSupport { get; set;}
         [Display(Name="Stage:")]
-        public Stage? stage { get; set;}
+        public Stage? Stage { get; set;}
         [Display(Name = "Does your supervisor have a grant?")]
         public bool? SupervisorGrant { get; set;}
         [Display(Name="Have you applied to VC Conference fund?")]
