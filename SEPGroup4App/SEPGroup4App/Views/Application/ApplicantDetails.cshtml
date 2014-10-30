@@ -8,6 +8,11 @@
 @Html.Partial("HeaderSections", HeaderSections.ApplicantDetails)
 
 @Styles.Render()
+<style type="text/css">
+    .checkbox-3-row-label {
+        margin-top: 20px !important;
+    }
+</style>
 
 @using (Html.BeginForm())
 {
@@ -68,7 +73,9 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.FirstApplicationThisYear, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.FirstApplicationThisYear, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.FirstApplicationThisYear, new { htmlAttributes = new { @class = "checkbox-3-row-label" } })
+                        </div>
                         @Html.ValidationMessageFor(model => model.FirstApplicationThisYear, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -80,8 +87,8 @@
                         <input type="submit" value="Next" class="btn btn-default pull-right" />
                     </div>
                 </div>
-              </div>
-           </div>
+            </div>
+    </div>
     </div>
 }
 
