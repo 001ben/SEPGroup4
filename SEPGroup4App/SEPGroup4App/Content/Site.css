@@ -83,7 +83,7 @@ textarea {
     width: 100%;
     height: 52px;
     color: white;
-    background-color: #428bca;
+    background-color: #00749b;
     border-left: 1px solid #aaa;
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
@@ -105,7 +105,7 @@ textarea {
     width: 0;
     height: 0;
     border-top: 26px solid transparent;
-    border-left: 47.5px solid #428bca;
+    border-left: 47.5px solid #00749b;
     border-bottom: 26px solid transparent;
     z-index: -9;
 }
