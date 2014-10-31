@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace SEPGroup4App.Models.User
+namespace SEPGroup4App.Models
 {
     public abstract class User
     {
