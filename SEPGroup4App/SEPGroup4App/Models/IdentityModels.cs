@@ -18,16 +18,16 @@ namespace SEPGroup4App.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AuthenticationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        public AuthenticationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public static ApplicationDbContext Create()
+        public static AuthenticationDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new AuthenticationDbContext();
         }
     }
 }

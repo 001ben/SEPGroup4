@@ -9,6 +9,10 @@ namespace SEPGroup4App.ViewModels
 {
     public class FundingDetailsViewModel
     {
+        // Related application Id
+        public int? ApplicationId { get; set; }
+
+
         //Research information
         [Display(Name="Is this a research fund?")]
         public bool? ResearchGrant { get; set;}

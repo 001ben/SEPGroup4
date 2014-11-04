@@ -21,7 +21,7 @@ namespace SEPGroup4App.Models
         public bool? ResearchStudent { get; set; }     
         public string ResearchStrength { get; set; }      
         public bool? StrengthSupport { get; set; }
-        public Stage? stage { get; set; }
+        public Stage? Stage { get; set; }
         public bool? SupervisorGrant { get; set; }
         public bool? AppliedtoVCFund { get; set; }
         public decimal? VCFundGrantAmount { get; set; }

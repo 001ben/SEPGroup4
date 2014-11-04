@@ -1,0 +1,11 @@
+﻿@model string
+@{
+    ViewBag.Title = "Application Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-primary">Oh no, Something went wrong!</h2>
+@if(!string.IsNullOrEmpty(Model))
+{
+    <h3 class="text-info">@Model</h3>
+}

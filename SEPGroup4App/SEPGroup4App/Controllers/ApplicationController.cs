@@ -4,55 +4,362 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using SEPGroup4App.Models;
 
 namespace SEPGroup4App.Controllers
 {
     public class ApplicationController : Controller
     {
+        public ApplicationDBEntities ApplicationData
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Get<ApplicationDBEntities>();
+            }
+        }
+
         // GET: Application
         public ActionResult Index()
         {
-            return RedirectToAction("ApplicantDetails");
+            // Create new application
+            Application app = new Application()
+            {
+                // May pre-create sections, or leave blank for prefill
+                //ApplicantDetails = new ApplicantDetails(),
+                //FundingDetails = new FundingDetails(),
+                //TravelDetails = new TravelDetails(),
+                // StaffStudentId = current user's id
+            };
+
+            // Add to context
+            ApplicationData.Applications.Add(app);
+
+            // Save changes to save it to the database
+            ApplicationData.SaveChanges();
+
+            // Navigate to the Applicant Details screen to begin entering data for the application
+            return RedirectToAction("ApplicantDetails", new { applicationId = app.ApplicationId });
         }
 
-        public ActionResult ApplicantDetails()
+        /// <summary>
+        /// Show ApplicantDetails form with data from database
+        /// </summary>
+        /// <param name="applicationId">Related application id to view applicant details for</param>
+        /// <returns>ApplicantDetails view</returns>
+        public ActionResult ApplicantDetails(int? applicationId)
         {
-            // Get data from database
+            Application application = GetApplication(applicationId, "applicant details");
 
-            ApplicantDetailsViewModel model = new ApplicantDetailsViewModel();
+            // Decide whether required to create applicant details or get current details
+            if (application.ApplicantDetails == null)
+            {
+                // Create a new applicant details section for the application
+                application.ApplicantDetails = new ApplicantDetails()
+                {
+                    // Prefill applicant details with current user details
+                };
+
+                // Create a new application
+                ApplicationData.Entry(application).State = System.Data.Entity.EntityState.Modified;
+                ApplicationData.SaveChanges();
+            }
+
+            // Get values for view model from the applicant details section in database
+            ApplicantDetailsViewModel model = new ApplicantDetailsViewModel()
+            {
+                ApplicantType = application.ApplicantDetails.ApplicantType,
+                ApplicationId = application.ApplicantDetails.ApplicationId,
+                Email = application.ApplicantDetails.Email,
+                FirstApplicationThisYear = application.ApplicantDetails.FirstApplicationThisYear,
+                FirstName = application.ApplicantDetails.FirstName,
+                LastName = application.ApplicantDetails.LastName,
+                PhoneNumber = application.ApplicantDetails.PhoneNumber,
+                SchoolUnit = application.ApplicantDetails.SchoolUnit,
+                Supervisor = application.ApplicantDetails.Supervisor,
+            };
+
             return View(model);
         }
 
+        /// <summary>
+        /// Update the applicant details section in the database if view model is valid
+        /// </summary>
+        /// <param name="model">Model class for the applicant details view model</param>
+        /// <returns>The applicant details view, or redirects to travel details if successful</returns>
         [HttpPost]
         public ActionResult ApplicantDetails(ApplicantDetailsViewModel model)
         {
-            return RedirectToAction("TravelDetails");
-        }
+            // Only add to database if the model is valid (otherwise show form again with the validation errors
+            if (ModelState.IsValid)
+            {
+                // Get the applicant details section from the database
+                ApplicantDetails applicantDetails = ApplicationData
+                    .ApplicantDetails
+                    .Where(a => a.ApplicationId == model.ApplicationId)
+                    .FirstOrDefault();
 
-        public ActionResult TravelDetails()
-        {
-            TravelDetailsViewModel model = new TravelDetailsViewModel();
+                // Update the applicant details section
+                applicantDetails.Email = model.Email;
+                applicantDetails.FirstApplicationThisYear = model.FirstApplicationThisYear;
+                applicantDetails.FirstName = model.FirstName;
+                applicantDetails.LastName = model.LastName;
+                applicantDetails.PhoneNumber = model.PhoneNumber;
+                applicantDetails.SchoolUnit = model.SchoolUnit;
+                applicantDetails.Supervisor = model.Supervisor;
+
+                // Update Application Data
+                ApplicationData.Entry(applicantDetails).State = System.Data.Entity.EntityState.Modified;
+                ApplicationData.SaveChanges();
+
+                // Redirect to the Travel Details section
+                return RedirectToAction("TravelDetails", new { applicationId = applicantDetails.ApplicationId });
+            }
+
+            // Return this view with errors
             return View(model);
         }
 
+        /// <summary>
+        /// Show the Travel Details view with data from the database
+        /// </summary>
+        /// <param name="applicationId">Related application Id to view travel details for</param>
+        /// <returns>TravelDetails view</returns>
+        public ActionResult TravelDetails(int? applicationId)
+        {
+            // Retrieve the application from the database
+            Application application = GetApplication(applicationId, "travel details");
+
+            // Decide whether required to create applicant details or get current details
+            if (application.TravelDetails == null)
+            {
+                // Create new travel details section
+                application.TravelDetails = new TravelDetails();
+
+                // Create the travel details section in the database
+                ApplicationData.Entry(application).State = System.Data.Entity.EntityState.Modified;
+                ApplicationData.SaveChanges();
+            }
+
+            // Create the view model with database data
+            TravelDetailsViewModel model = new TravelDetailsViewModel()
+            {
+                AttachedDocuments = application.TravelDetails.AttachedDocuments,
+                City = application.TravelDetails.City,
+                ConferenceEndDate = application.TravelDetails.ConferenceEndDate,
+                ConferenceNameDetails = application.TravelDetails.ConferenceNameDetails,
+                ConferenceStartDate = application.TravelDetails.ConferenceStartDate,
+                ConferenceURL = application.TravelDetails.ConferenceURL,
+                Country = application.TravelDetails.Country,
+                DepartureDate = application.TravelDetails.DepartureDate,
+                HERDCPoints = application.TravelDetails.HERDCPoints,
+                JustificationForTravel = application.TravelDetails.JustificationForTravel,
+                PaperAccepted = application.TravelDetails.PaperAccepted,
+                PaperTitle = application.TravelDetails.PaperTitle,
+                PaperType = application.TravelDetails.PaperType,
+                PEPArrangements = application.TravelDetails.PEPArrangements,
+                PEPEndDate = application.TravelDetails.PEPEndDate,
+                PEPStartDate = application.TravelDetails.PEPStartDate,
+                PublicationImportanceAndQuality = application.TravelDetails.PublicationImportanceAndQuality,
+                SpecialDuties = application.TravelDetails.SpecialDuties,
+                Quality = application.TravelDetails.Quality,
+                Region = application.TravelDetails.Region,
+                ReturnDate = application.TravelDetails.ReturnDate,
+            };
+
+            // Return view with model
+            return View(model);
+        }
+
+        /// <summary>
+        /// Update the travel details section in the database if view model is valid
+        /// </summary>
+        /// <param name="model">Travel Details View model containing the submitted information</param>
+        /// <returns>Redirects to the funding details action</returns>
         [HttpPost]
         public ActionResult TravelDetails(TravelDetailsViewModel model)
         {
-            return RedirectToAction("FundingDetails");
-        }
+            // Check that the model is valid and return the view with the validation errors if not
+            if (ModelState.IsValid)
+            {
+                // Get the travel details section from the database
+                TravelDetails travelDetails = ApplicationData
+                    .TravelDetails
+                    .Where(a => a.ApplicationId == model.ApplicationId)
+                    .FirstOrDefault();
 
-        public ActionResult FundingDetails()
-        {
-            // Get data from database
+                // Update the travel details section
+                travelDetails.AttachedDocuments = model.AttachedDocuments;
+                travelDetails.City = model.City;
+                travelDetails.ConferenceEndDate = model.ConferenceEndDate;
+                travelDetails.ConferenceNameDetails = model.ConferenceNameDetails;
+                travelDetails.ConferenceStartDate = model.ConferenceStartDate;
+                travelDetails.ConferenceURL = model.ConferenceURL;
+                travelDetails.Country = model.Country;
+                travelDetails.DepartureDate = model.DepartureDate;
+                travelDetails.HERDCPoints = model.HERDCPoints;
+                travelDetails.JustificationForTravel = model.JustificationForTravel;
+                travelDetails.PaperAccepted = model.PaperAccepted;
+                travelDetails.PaperTitle = model.PaperTitle;
+                travelDetails.PaperType = model.PaperType;
+                travelDetails.PEPArrangements = model.PEPArrangements;
+                travelDetails.PEPEndDate = model.PEPEndDate;
+                travelDetails.PEPStartDate = model.PEPStartDate;
+                travelDetails.PublicationImportanceAndQuality = model.PublicationImportanceAndQuality;
+                travelDetails.SpecialDuties = model.SpecialDuties;
+                travelDetails.Quality = model.Quality;
+                travelDetails.Region = model.Region;
+                travelDetails.ReturnDate = model.ReturnDate;
 
-            FundingDetailsViewModel model = new FundingDetailsViewModel();
+                // Update travel details section in database
+                ApplicationData.Entry(travelDetails).State = System.Data.Entity.EntityState.Modified;
+                ApplicationData.SaveChanges();
+
+                return RedirectToAction("FundingDetails", new { applicationId = travelDetails.ApplicationId });
+            }
+
+            // Return view with errors
             return View(model);
         }
 
+        /// <summary>
+        /// Show the Funding Details view with data from the database
+        /// </summary>
+        /// Related application Id to view travel details for
+        /// <returns>FundingDetails view</returns>
+        public ActionResult FundingDetails(int? applicationId)
+        {
+            // Get data from database
+            // Retrieve the application from the database
+            Application application = GetApplication(applicationId, "funding details");
+
+            // Decide whether required to create applicant details or get current details
+            if (application.FundingDetails == null)
+            {
+                // Create new travel details section
+                application.FundingDetails = new FundingDetails();
+
+                // Create the travel details section in the database
+                ApplicationData.Entry(application).State = System.Data.Entity.EntityState.Modified;
+                ApplicationData.SaveChanges();
+            }
+
+            // Copy funding details from database to view model
+            FundingDetailsViewModel model = new FundingDetailsViewModel()
+            {
+                Accomodation = application.FundingDetails.Accomodation,
+                Airfare = application.FundingDetails.Airfare,
+                AppliedtoVCFund = application.FundingDetails.AppliedtoVCFund,
+                CarMileage = application.FundingDetails.CarMileage,
+                ConferenceFees = application.FundingDetails.ConferenceFees,
+                LocalFares = application.FundingDetails.LocalFares,
+                Meals = application.FundingDetails.Meals,
+                Other = application.FundingDetails.Other,
+                ResearchGrant = application.FundingDetails.ResearchGrant,
+                ResearchStrength = application.FundingDetails.ResearchStrength,
+                ResearchStudent = application.FundingDetails.ResearchStudent,
+                Stage = application.FundingDetails.Stage,
+                StrengthSupport = application.FundingDetails.StrengthSupport,
+                SupervisorGrant = application.FundingDetails.SupervisorGrant,
+                TotalExpenses = application.FundingDetails.TotalExpenses,
+                VCFundGrantAmount = application.FundingDetails.VCFundGrantAmount,
+            };
+
+            // Return the funding details view
+            return View(model);
+        }
+
+        /// <summary>
+        /// Update the travel details section in the database if view model is valid
+        /// </summary>
+        /// <param name="model">Funding Details View model containing the submitted information</param>
+        /// <returns>A redirect to the application submission confirmation page</returns>
         [HttpPost]
         public ActionResult FundingDetails(FundingDetailsViewModel model)
         {
+            if(ModelState.IsValid)
+            {
+                // Get the funding details section from the database
+                FundingDetails fundingDetails = ApplicationData
+                    .FundingDetails
+                    .Where(a => a.ApplicationId == model.ApplicationId)
+                    .FirstOrDefault();
+
+                // Update the funding details section
+                fundingDetails.Accomodation = model.Accomodation;
+                fundingDetails.Airfare = model.Airfare;
+                fundingDetails.AppliedtoVCFund = model.AppliedtoVCFund;
+                fundingDetails.CarMileage = model.CarMileage;
+                fundingDetails.ConferenceFees = model.ConferenceFees;
+                fundingDetails.LocalFares = model.LocalFares;
+                fundingDetails.Meals = model.Meals;
+                fundingDetails.Other = model.Other;
+                fundingDetails.ResearchGrant = model.ResearchGrant;
+                fundingDetails.ResearchStrength = model.ResearchStrength;
+                fundingDetails.ResearchStudent = model.ResearchStudent;
+                fundingDetails.Stage = model.Stage;
+                fundingDetails.StrengthSupport = model.StrengthSupport;
+                fundingDetails.SupervisorGrant = model.SupervisorGrant;
+                fundingDetails.TotalExpenses = model.TotalExpenses;
+                fundingDetails.VCFundGrantAmount = model.VCFundGrantAmount;
+
+                // Update funding details section in database
+                ApplicationData.Entry(fundingDetails).State = System.Data.Entity.EntityState.Modified;
+                ApplicationData.SaveChanges();
+
+                // Redirect to FundingDetails view until logic is added for application submission
+                return RedirectToAction("FundingDetails", new { applicationId = fundingDetails.ApplicationId });
+            }
+
+            // Show Funding Details view with errors
             return View(model);
         }
+
+
+        #region Non action methods
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            base.OnException(filterContext);
+
+            string message = filterContext.Exception is ShowMessageException ? filterContext.Exception.Message : null;
+
+            filterContext.Result = RedirectToAction("ApplicationError", new { message = message });
+        }
+
+        [AllowAnonymous]
+        public ActionResult ApplicationError(string message)
+        {
+            return View(message);
+        }
+
+        public class ShowMessageException : Exception
+        {
+            public ShowMessageException(string message)
+                : base(message)
+            { }
+
+            public ShowMessageException(string message, params string[] formatArgs)
+                : base(string.Format(message, formatArgs))
+            { }
+        }
+
+        private Application GetApplication(int? id, string detailType)
+        {
+            // Get the application being edited
+            var application = ApplicationData.Applications.Find(id);
+
+            // If no application found, return error
+            if (application == null)
+            {
+                throw new ShowMessageException("Error: can't access {0} without an applicationId", detailType);
+            }
+            else
+            {
+                return application;
+            }
+        }
+        #endregion
     }
 }

@@ -9,6 +9,7 @@ namespace SEPGroup4App.ViewModels
 {
     public class ApplicantDetailsViewModel
     {
+        // Related application Id
         public int? ApplicationId { get; set; }
 
         [Display(Name="First Name")]

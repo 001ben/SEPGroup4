@@ -38,7 +38,7 @@ namespace SEPGroup4App.Models
 
         //ID
         [Key, ForeignKey("Application"), DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ApplicantionID { get; set; }
+        public int ApplicationId { get; set; }
 
         #region Departure Info
         //Holds basic travel details
@@ -74,7 +74,7 @@ namespace SEPGroup4App.Models
         public string PaperTitle { get; set; }
         public bool PaperAccepted { get; set; }
         public AttachedDocuments? AttachedDocuments { get; set; }
-        public bool HERDECPoints { get; set; }
+        public bool HERDCPoints { get; set; }
         public string PublicationImportanceAndQuality { get; set; }
         #endregion
     }

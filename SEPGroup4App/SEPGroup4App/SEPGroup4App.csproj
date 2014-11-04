@@ -185,6 +185,10 @@
     <Compile Include="ViewModels\FundingDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ApplicationDb.mdf" />
+    <Content Include="App_Data\ApplicationDb_log.ldf">
+      <DependentUpon>ApplicationDb.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -261,10 +265,9 @@
     <Content Include="Views\Application\TravelDetails.cshtml" />
     <Content Include="Views\Application\FundingDetails.cshtml" />
     <Content Include="Views\Application\HeaderSections.cshtml" />
+    <Content Include="Views\Shared\ApplicationError.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

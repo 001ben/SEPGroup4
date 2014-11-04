@@ -10,6 +10,9 @@ namespace SEPGroup4App.ViewModels
  
     public class TravelDetailsViewModel
     {
+        // Related application Id
+        public int? ApplicationId { get; set; }
+
         // Travel Information
         [Display(Name="Paper Type")]
         public PaperType? PaperType { get; set; }

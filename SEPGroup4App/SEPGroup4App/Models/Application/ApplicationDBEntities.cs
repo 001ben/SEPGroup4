@@ -5,6 +5,8 @@ using System.Web;
 using SEPGroup4App.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace SEPGroup4App.Models
 {
@@ -12,8 +14,11 @@ namespace SEPGroup4App.Models
     {
         public ApplicationDBEntities()
             :base("ApplicationDBEntities")
-        {
+        {}
 
+        public static ApplicationDBEntities Create()
+        {
+            return new ApplicationDBEntities();
         }
 
         public virtual DbSet<ApplicantDetails> ApplicantDetails { get; set; }

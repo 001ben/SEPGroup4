@@ -16,5 +16,7 @@ namespace SEPGroup4App.Models
         public string StaffStudentId { get; set; }
 
         public virtual ApplicantDetails ApplicantDetails { get; set; }
+        public virtual TravelDetails TravelDetails { get; set; }
+        public virtual FundingDetails FundingDetails { get; set; }
     }
 }
