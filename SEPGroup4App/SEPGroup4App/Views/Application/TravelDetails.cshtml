@@ -7,6 +7,12 @@
 
 @Html.Partial("HeaderSections", HeaderSections.TravelDetails)
 
+<style class="slight-space">
+    .slight-space {
+        height: 10px;
+    }
+</style>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -23,11 +29,19 @@
             <div class="tab-content">
                 @* Travel Information *@
                 <div class="tab-pane active" id="travel-information">
-
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EnumRadioButtonsFor(model => model.PaperType)
+                                @Html.ValidationMessageFor(model => model.PaperType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="form-group">
                             @* Date Time Picker Example Start. Key bits are the "input-group date" div, and the input-group addon
-                            I've set the datetimepicker javascript to run for elements with class "date", so make sure to incude *@
+                                I've set the datetimepicker javascript to run for elements with class "date", so make sure to incude *@
                             @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 <div class='input-group date'>
@@ -59,17 +73,15 @@
                     </div>
 
                     <div class="row">
-                        <div class="row">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.PEPArrangements, new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.PEPArrangements)
-                                    </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PEPArrangements, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.PEPArrangements)
                                 </div>
                             </div>
-                            </div>
                         </div>
+                    </div>
 
                     <div class="row">
                         <div class="form-group">
@@ -108,9 +120,15 @@
                     <div class="row">
                         <div class="form-group">
                             @Html.LabelFor(model => model.ConferenceURL, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-md-4">
                                 @Html.EditorFor(model => model.ConferenceURL, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ConferenceURL, "", new { @class = "text-danger" })
+                            </div>
+
+                            @Html.LabelFor(model => model.Quality, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EnumRadioButtonsFor(model => model.Quality)
+                                @Html.ValidationMessageFor(model => model.Quality, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -136,6 +154,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SpecialDuties, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EnumRadioButtonsFor(model => model.SpecialDuties)
+                                @Html.ValidationMessageFor(model => model.SpecialDuties, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="form-group">
@@ -158,66 +185,71 @@
                             </div>
                         </div>
                     </div>
-                    </div>
-
-                    @* Paper Information *@
-                    <div class="tab-pane" id="paper-information">
-                        <div class="row">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.PaperTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.PaperTitle, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PaperTitle, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            </div>
-                        <div class="row">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.PaperAccepted, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.EditorFor(model => model.PaperAccepted, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PaperAccepted, "", new { @class = "text-danger" })
-                                </div>
-                            
-                                @Html.LabelFor(model => model.HERDCPoints, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.HERDCPoints)
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                        <div class="row">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.AttachedDocuments, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    <input type="file" id="AttachedDocuments">
-                                    <p class="help-block">Upload relevant documents here. E.g. email confirmation and conference paper</p>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.PublicationImportanceAndQuality, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.PublicationImportanceAndQuality, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.PublicationImportanceAndQuality, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                 </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            @Html.ActionLink("Back", "ApplicantDetails", new { applicationId = Model.ApplicationId }, new { @class = "btn btn-default" })
-                            <input type="submit" value="Next" class="btn btn-default pull-right" />
+
+                @* Paper Information *@
+                <div class="tab-pane" id="paper-information">
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PaperTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PaperTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PaperTitle, "", new { @class = "text-danger" })
+                            </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PaperAccepted, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.PaperAccepted)
+                                </div>
+                                @Html.ValidationMessageFor(model => model.PaperAccepted, "", new { @class = "text-danger" })
+                            </div>
+
+                            @Html.LabelFor(model => model.HERDCPoints, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-2">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.HERDCPoints)
+                                </div>
+                                @Html.ValidationMessageFor(model => model.HERDCPoints, "", new { @class="text-danger" } )
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PublicationImportanceAndQuality, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PublicationImportanceAndQuality, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PublicationImportanceAndQuality, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AttachedDocuments, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EnumCheckboxesFor(model => model.AttachedDocuments)
+                                <div class="slight-space"></div>
+                                <input type="file" id="AttachedDocuments">
+                                <p class="help-block">Upload relevant documents here. E.g. email confirmation and conference paper</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.ActionLink("Back", "ApplicantDetails", new { applicationId = Model.ApplicationId }, new { @class = "btn btn-default" })
+                        <input type="submit" value="Next" class="btn btn-default pull-right" />
                     </div>
                 </div>
             </div>
-       
+        </div>
+
     </div>
 }
 

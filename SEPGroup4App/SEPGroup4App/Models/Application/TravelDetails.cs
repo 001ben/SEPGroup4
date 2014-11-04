@@ -10,7 +10,10 @@ namespace SEPGroup4App.Models
 {
     public enum PaperType
     {
-        ConferencePaper, JournalPaper
+        [Display(Name="Conference Paper")]
+        ConferencePaper, 
+        [Display(Name="Journal Paper")]
+        JournalPaper
     }
 
     public enum ConferenceQuality
@@ -20,15 +23,21 @@ namespace SEPGroup4App.Models
 
     public enum SpecialDuties
     {
-        SpecialInvitation, AboveJustPresenting
+        [Display(Name="Special invitation to conference received")]
+        SpecialInvitation, 
+        [Display(Name="Will perform special duties above just presenting the paper")]
+        AboveJustPresenting
     }
 
     // http://stackoverflow.com/questions/1030090/how-do-you-pass-multiple-enum-values-in-c
     [Flags]
     public enum AttachedDocuments
     {
+        [Display(Name="Conference Email")]
         ConferenceEmail = 1,
+        [Display(Name = "Peer Reviews")]
         PeerReviews = 2,
+        [Display(Name = "Paper Copy")]
         PaperCopy = 4
     }
 

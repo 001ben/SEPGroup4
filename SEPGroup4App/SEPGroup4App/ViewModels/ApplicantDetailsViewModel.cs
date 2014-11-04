@@ -22,7 +22,7 @@ namespace SEPGroup4App.ViewModels
         public string Email { get; set; }
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-        [Display(Name = "Application Type")]
+        [Display(Name = "Applicant Type")]
         public ApplicantType? ApplicantType { get; set; }
         [Display(Name = "Is this your first application this year?")]
         public bool FirstApplicationThisYear { get; set; }

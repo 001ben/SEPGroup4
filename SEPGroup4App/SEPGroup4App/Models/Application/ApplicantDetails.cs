@@ -10,7 +10,10 @@ namespace SEPGroup4App.Models
 {
     public enum ApplicantType
     {
-        ResearchStudent = 0, Staff = 1
+        [Display(Name="Research Student")]
+        ResearchStudent = 0, 
+        [Display(Name="Staff")]
+        Staff = 1
     }
 
     public class ApplicantDetails

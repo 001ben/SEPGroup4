@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using SEPGroup4App.Models;
 using System.Data.Entity.Validation;
+using SEPGroup4App.Helpers;
 
 namespace SEPGroup4App.Controllers
 {
@@ -194,7 +195,7 @@ namespace SEPGroup4App.Controllers
         /// <param name="model">Travel Details View model containing the submitted information</param>
         /// <returns>Redirects to the funding details action</returns>
         [HttpPost]
-        public ActionResult TravelDetails(TravelDetailsViewModel model)
+        public ActionResult TravelDetails(TravelDetailsViewModel model, AttachedDocuments[] AttachedDocuments)
         {
             // Check that the model is valid and return the view with the validation errors if not
             if (ModelState.IsValid)
@@ -206,7 +207,7 @@ namespace SEPGroup4App.Controllers
                     .FirstOrDefault();
 
                 // Update the travel details section
-                travelDetails.AttachedDocuments = model.AttachedDocuments;
+                travelDetails.AttachedDocuments = AttachedDocuments != null ? AttachedDocuments.Aggregate((a,b) => a | b) : default(AttachedDocuments?);
                 travelDetails.City = model.City;
                 travelDetails.ConferenceEndDate = model.ConferenceEndDate;
                 travelDetails.ConferenceNameDetails = model.ConferenceNameDetails;
@@ -336,13 +337,27 @@ namespace SEPGroup4App.Controllers
 
         #region Non action methods
 
+        public bool IsDebug
+        {
+            get { 
+                #if(DEBUG)
+                    return true;
+                #else
+                    return false
+                #endif
+            }
+        }
+
         protected override void OnException(ExceptionContext filterContext)
         {
-            string message = filterContext.Exception is ShowMessageException ? filterContext.Exception.Message : null;
+            if(!IsDebug) 
+            {
+                string message = filterContext.Exception is ShowMessageException ? filterContext.Exception.Message : null;
 
-            filterContext.ExceptionHandled = true;
+                filterContext.ExceptionHandled = true;
 
-            filterContext.Result = RedirectToAction("ApplicationError", new { message = message });
+                filterContext.Result = RedirectToAction("ApplicationError", new { message = message });
+            }
 
             base.OnException(filterContext);
         }
@@ -351,17 +366,6 @@ namespace SEPGroup4App.Controllers
         public ActionResult ApplicationError(string message)
         {
             return View(message);
-        }
-
-        public class ShowMessageException : Exception
-        {
-            public ShowMessageException(string message)
-                : base(message)
-            { }
-
-            public ShowMessageException(string message, params string[] formatArgs)
-                : base(string.Format(message, formatArgs))
-            { }
         }
 
         private Application GetApplication(int? id, string detailType)

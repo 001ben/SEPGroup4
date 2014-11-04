@@ -170,6 +170,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EnumOptions.cs" />
+    <Compile Include="Helpers\ShowMessageException.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Application\ApplicantDetails.cs" />
     <Compile Include="Models\Application\Application.cs" />

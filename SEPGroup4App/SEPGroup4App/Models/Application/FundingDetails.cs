@@ -9,7 +9,12 @@ namespace SEPGroup4App.Models
 {
     public enum Stage
     {
-        Stage1, Stage2, Stage3
+        [Display(Name="Stage 1 (Pre DA)")]
+        Stage1, 
+        [Display(Name="Stage 2 (Post DA)")]
+        Stage2, 
+        [Display(Name="Stage 3 (Final/Writing Up)")]
+        Stage3
     }
 
     public class FundingDetails
