@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using SEPGroup4App.Models;
+using System.Data.Entity.Validation;
 
 namespace SEPGroup4App.Controllers
 {
@@ -77,7 +78,7 @@ namespace SEPGroup4App.Controllers
                 LastName = application.ApplicantDetails.LastName,
                 PhoneNumber = application.ApplicantDetails.PhoneNumber,
                 SchoolUnit = application.ApplicantDetails.SchoolUnit,
-                Supervisor = application.ApplicantDetails.Supervisor,
+                Supervisor = application.ApplicantDetails.Supervisor
             };
 
             return View(model);
@@ -94,27 +95,41 @@ namespace SEPGroup4App.Controllers
             // Only add to database if the model is valid (otherwise show form again with the validation errors
             if (ModelState.IsValid)
             {
-                // Get the applicant details section from the database
-                ApplicantDetails applicantDetails = ApplicationData
-                    .ApplicantDetails
-                    .Where(a => a.ApplicationId == model.ApplicationId)
-                    .FirstOrDefault();
+                try
+                {
+                    // Get the applicant details section from the database
+                    ApplicantDetails applicantDetails = ApplicationData
+                        .ApplicantDetails
+                        .Where(a => a.ApplicationId == model.ApplicationId)
+                        .FirstOrDefault();
 
-                // Update the applicant details section
-                applicantDetails.Email = model.Email;
-                applicantDetails.FirstApplicationThisYear = model.FirstApplicationThisYear;
-                applicantDetails.FirstName = model.FirstName;
-                applicantDetails.LastName = model.LastName;
-                applicantDetails.PhoneNumber = model.PhoneNumber;
-                applicantDetails.SchoolUnit = model.SchoolUnit;
-                applicantDetails.Supervisor = model.Supervisor;
+                    // Update the applicant details section
+                    applicantDetails.Email = model.Email;
+                    applicantDetails.FirstApplicationThisYear = model.FirstApplicationThisYear;
+                    applicantDetails.FirstName = model.FirstName;
+                    applicantDetails.LastName = model.LastName;
+                    applicantDetails.PhoneNumber = model.PhoneNumber;
+                    applicantDetails.SchoolUnit = model.SchoolUnit;
+                    applicantDetails.Supervisor = model.Supervisor;
 
-                // Update Application Data
-                ApplicationData.Entry(applicantDetails).State = System.Data.Entity.EntityState.Modified;
-                ApplicationData.SaveChanges();
+                    // Update Application Data
+                    ApplicationData.Entry(applicantDetails).State = System.Data.Entity.EntityState.Modified;
+                    ApplicationData.SaveChanges();
 
-                // Redirect to the Travel Details section
-                return RedirectToAction("TravelDetails", new { applicationId = applicantDetails.ApplicationId });
+                    // Redirect to the Travel Details section
+                    return RedirectToAction("TravelDetails", new { applicationId = applicantDetails.ApplicationId });
+                }
+                catch(DbEntityValidationException e)
+                {
+                    foreach(var error in e.EntityValidationErrors.SelectMany(ev => ev.ValidationErrors))
+                    {
+                        ModelState.AddModelError("", error.ErrorMessage);
+                    }
+                }
+                catch(Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                }
             }
 
             // Return this view with errors
@@ -145,6 +160,7 @@ namespace SEPGroup4App.Controllers
             // Create the view model with database data
             TravelDetailsViewModel model = new TravelDetailsViewModel()
             {
+                ApplicationId = application.ApplicationId,
                 AttachedDocuments = application.TravelDetails.AttachedDocuments,
                 City = application.TravelDetails.City,
                 ConferenceEndDate = application.TravelDetails.ConferenceEndDate,
@@ -248,6 +264,7 @@ namespace SEPGroup4App.Controllers
             // Copy funding details from database to view model
             FundingDetailsViewModel model = new FundingDetailsViewModel()
             {
+                ApplicationId = application.ApplicationId,
                 Accomodation = application.FundingDetails.Accomodation,
                 Airfare = application.FundingDetails.Airfare,
                 AppliedtoVCFund = application.FundingDetails.AppliedtoVCFund,
@@ -321,11 +338,13 @@ namespace SEPGroup4App.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            base.OnException(filterContext);
-
             string message = filterContext.Exception is ShowMessageException ? filterContext.Exception.Message : null;
 
+            filterContext.ExceptionHandled = true;
+
             filterContext.Result = RedirectToAction("ApplicationError", new { message = message });
+
+            base.OnException(filterContext);
         }
 
         [AllowAnonymous]

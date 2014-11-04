@@ -15,6 +15,7 @@ namespace SEPGroup4App.Models
 
     public class ApplicantDetails
     {
+        [Required]
         [Key, ForeignKey("Application"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ApplicationId { get; set; }
 
@@ -28,7 +29,6 @@ namespace SEPGroup4App.Models
         public ApplicantType? ApplicantType { get; set; }
         public bool FirstApplicationThisYear { get; set; }
 
-        [Required]
         public virtual Application Application { get; set; }
     }
 }

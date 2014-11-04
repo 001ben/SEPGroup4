@@ -14,6 +14,7 @@ namespace SEPGroup4App.Models
 
     public class FundingDetails
     {
+        [Required]
         [Key, ForeignKey("Application"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ApplicationId { get; set; }
 
@@ -34,7 +35,6 @@ namespace SEPGroup4App.Models
         public decimal? Other { get; set; }        
         public decimal? TotalExpenses { get; set; }
 
-        [Required]
         public virtual Application Application { get; set; }
     }
 }

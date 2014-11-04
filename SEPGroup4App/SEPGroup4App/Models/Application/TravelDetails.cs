@@ -37,8 +37,11 @@ namespace SEPGroup4App.Models
         //Properties
 
         //ID
+        [Required]
         [Key, ForeignKey("Application"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ApplicationId { get; set; }
+
+        public virtual Application Application { get; set; }
 
         #region Departure Info
         //Holds basic travel details
