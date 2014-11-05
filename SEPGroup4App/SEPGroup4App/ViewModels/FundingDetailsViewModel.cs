@@ -20,12 +20,12 @@ namespace SEPGroup4App.ViewModels
         [Display(Name="Are you a research Student?")]
         [Required]
         public bool? ResearchStudent { get; set;}
-        [Display(Name="Research Strength:")]
+        [Display(Name="Research Strength")]
         [DataType(DataType.MultilineText)]
         public string ResearchStrength { get; set;}
         [Display(Name="Is there Travel support for the research strength?")]
         public bool? StrengthSupport { get; set;}
-        [Display(Name="Stage:")]
+        [Display(Name="Stage")]
         [Required]
         public Stage? Stage { get; set;}
         [Display(Name = "Does your supervisor have a grant?")]

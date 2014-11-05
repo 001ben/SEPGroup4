@@ -32,9 +32,11 @@
                 <div class="tab-pane active" id="travel-information">
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.PaperType, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-10">
                                 @Html.EnumRadioButtonsFor(model => model.PaperType)
+                            </div>
+                            <div class="col-md-10 col-md-offset-2">
                                 @Html.ValidationMessageFor(model => model.PaperType, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -43,7 +45,7 @@
                         <div class="form-group">
                             @* Date Time Picker Example Start. Key bits are the "input-group date" div, and the input-group addon
                                 I've set the datetimepicker javascript to run for elements with class "date", so make sure to incude *@
-                            @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class='input-group date'>
                                     @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -53,7 +55,7 @@
                             </div>
                             @* Date Time Picker Example End *@
 
-                            @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class='input-group date'>
                                     @Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -65,7 +67,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.JustificationForTravel, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.JustificationForTravel, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.JustificationForTravel, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.JustificationForTravel, "", new { @class = "text-danger" })
@@ -111,7 +113,7 @@
                 <div class="tab-pane" id="conference-information">
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ConferenceNameDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.ConferenceNameDetails, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.ConferenceNameDetails, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ConferenceNameDetails, "", new { @class = "text-danger" })
@@ -126,7 +128,7 @@
                                 @Html.ValidationMessageFor(model => model.ConferenceURL, "", new { @class = "text-danger" })
                             </div>
 
-                            @Html.LabelFor(model => model.Quality, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Quality, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 @Html.EnumRadioButtonsFor(model => model.Quality)
                                 </div>
@@ -137,7 +139,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ConferenceStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.ConferenceStartDate, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class='input-group date'>
                                     @Html.EditorFor(model => model.ConferenceStartDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -147,7 +149,7 @@
                             </div>
 
 
-                            @Html.LabelFor(model => model.ConferenceEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.ConferenceEndDate, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class='input-group date'>
                                     @Html.EditorFor(model => model.ConferenceEndDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -159,7 +161,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.SpecialDuties, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.SpecialDuties, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-10">
                                 @Html.EnumRadioButtonsFor(model => model.SpecialDuties)
                                 @Html.ValidationMessageFor(model => model.SpecialDuties, "", new { @class = "text-danger" })
@@ -169,19 +171,19 @@
 
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                             </div>
 
-                            @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
                             </div>
 
-                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })

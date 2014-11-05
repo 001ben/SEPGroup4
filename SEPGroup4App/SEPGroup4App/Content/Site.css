@@ -136,3 +136,10 @@ textarea {
 .navbar-brand, .navbar-nav>li>a {
     color: white !important;   
 }
+
+/* Style the required asterisks */
+.required span {
+    color: #e32;
+    font-size: 1.25em;
+    display: inline-block;
+}

@@ -34,7 +34,6 @@ namespace SEPGroup4App.ViewModels
         [Required]
         public ApplicantType? ApplicantType { get; set; }
         [Display(Name = "Is this your first application this year?")]
-        [Required]
         public bool FirstApplicationThisYear { get; set; }
     }
 }
