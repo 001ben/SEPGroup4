@@ -13,12 +13,13 @@
     }
 </style>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("TravelDetails", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="col-md-offset-1 col-md-10">
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ApplicationId)
 
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#travel-information" role="tab" data-toggle="tab">Travel Information</a></li>
@@ -213,7 +214,7 @@
                                 <div class="checkbox">
                                     @Html.EditorFor(model => model.HERDCPoints)
                                 </div>
-                                @Html.ValidationMessageFor(model => model.HERDCPoints, "", new { @class="text-danger" } )
+                                @Html.ValidationMessageFor(model => model.HERDCPoints, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -232,7 +233,7 @@
                             <div class="col-md-10">
                                 @Html.EnumCheckboxesFor(model => model.AttachedDocuments)
                                 <div class="slight-space"></div>
-                                <input type="file" id="AttachedDocuments">
+                                <input type="file" id="FileUpload1" name="FileUpload1">
                                 <p class="help-block">Upload relevant documents here. E.g. email confirmation and conference paper</p>
                             </div>
                         </div>

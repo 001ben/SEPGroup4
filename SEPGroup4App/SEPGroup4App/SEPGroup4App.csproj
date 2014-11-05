@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -186,6 +188,11 @@
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\User\UserDBEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\FileManager\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="UserMigrations\201411040409335_Initial.cs" />
     <Compile Include="UserMigrations\201411040409335_Initial.Designer.cs">
@@ -240,6 +247,13 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\FileManager\FileManager.disco" />
+    <None Include="Service References\FileManager\configuration91.svcinfo" />
+    <None Include="Service References\FileManager\configuration.svcinfo" />
+    <None Include="Service References\FileManager\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -287,6 +301,16 @@
     <Content Include="Views\Application\FundingDetails.cshtml" />
     <Content Include="Views\Application\HeaderSections.cshtml" />
     <Content Include="Views\Shared\ApplicationError.cshtml" />
+    <None Include="Service References\FileManager\FileManager.wsdl" />
+    <None Include="Service References\FileManager\FileManager.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FileManager\FileManager1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FileManager\FileManager2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Administration\Create.cshtml" />
   </ItemGroup>
@@ -307,6 +331,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FileManager\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\ApplicationViewModels\" />

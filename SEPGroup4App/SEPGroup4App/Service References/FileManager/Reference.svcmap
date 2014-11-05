@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e1b714d9-369d-410c-8118-b3bb7e7394db" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:10350/FileManager.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FileManager.wsdl" MetadataType="Wsdl" ID="c600f3b9-676c-4f82-8bec-95829611ac89" SourceId="1" SourceUrl="http://localhost:10350/FileManager.svc?wsdl" />
+    <MetadataFile FileName="FileManager.xsd" MetadataType="Schema" ID="1cdb1e99-dc66-4ba6-b400-b00ef6de802e" SourceId="1" SourceUrl="http://localhost:10350/FileManager.svc?xsd=xsd1" />
+    <MetadataFile FileName="FileManager1.xsd" MetadataType="Schema" ID="b23ecb64-4075-4131-b7f3-36c94960f4c0" SourceId="1" SourceUrl="http://localhost:10350/FileManager.svc?xsd=xsd0" />
+    <MetadataFile FileName="FileManager2.xsd" MetadataType="Schema" ID="e1cf6204-60d7-4ada-a1f8-0b9fd99ebf1b" SourceId="1" SourceUrl="http://localhost:10350/FileManager.svc?xsd=xsd2" />
+    <MetadataFile FileName="FileManager.disco" MetadataType="Disco" ID="20007385-4762-441c-aa2f-a2b87877e2f7" SourceId="1" SourceUrl="http://localhost:10350/FileManager.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
