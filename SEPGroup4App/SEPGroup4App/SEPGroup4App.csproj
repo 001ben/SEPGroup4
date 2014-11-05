@@ -313,6 +313,7 @@
     </None>
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Administration\Create.cshtml" />
+    <Content Include="Views\Application\Submitted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UserMigrations\201411040409335_Initial.resx">

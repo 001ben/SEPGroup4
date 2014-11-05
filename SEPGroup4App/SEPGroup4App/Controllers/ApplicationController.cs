@@ -41,6 +41,11 @@ namespace SEPGroup4App.Controllers
             return RedirectToAction("ApplicantDetails", new { applicationId = app.ApplicationId });
         }
 
+        public ActionResult Submitted()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Show ApplicantDetails form with data from database
         /// </summary>
@@ -346,7 +351,7 @@ namespace SEPGroup4App.Controllers
                 ApplicationData.SaveChanges();
 
                 // Redirect to FundingDetails view until logic is added for application submission
-                return RedirectToAction("FundingDetails", new { applicationId = fundingDetails.ApplicationId });
+                return RedirectToAction("Submitted");
             }
 
             // Show Funding Details view with errors

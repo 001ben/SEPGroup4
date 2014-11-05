@@ -7,12 +7,13 @@
 
 @Html.Partial("HeaderSections", HeaderSections.FundingDetails)
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("FundingDetails", "Application", FormMethod.Post, new { id="funding-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="col-md-offset-1 col-md-10">
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ApplicationId)
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#researchinformation" role="tab" data-toggle="tab">Research Information</a></li>
                 <li><a href="#fundinginformation" role="tab" data-toggle="tab">Funding information</a></li>
@@ -138,7 +139,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.TotalExpenses, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.TotalExpenses, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                @Html.EditorFor(model => model.TotalExpenses, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                 @Html.ValidationMessageFor(model => model.TotalExpenses, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -149,7 +150,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         @Html.ActionLink("Back", "TravelDetails", new { applicationId = Model.ApplicationId }, new { @class = "btn btn-default" })
-                        <input type="submit" value="Next" class="btn btn-default pull-right" />
+                        <button type="button" id="submit-button" class="btn btn-default pull-right">Submit</button>
                     </div>
                 </div>
             </div>
@@ -161,4 +162,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#submit-button').click(function () {
+            if(confirm("Are you sure you want to submit your application? You may not re-submit after submission"))
+            {
+                $('#funding-form').submit();
+            }
+        });
+    </script>
 }

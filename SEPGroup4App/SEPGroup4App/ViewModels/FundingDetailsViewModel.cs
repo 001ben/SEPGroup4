@@ -60,7 +60,6 @@ namespace SEPGroup4App.ViewModels
         [Required]
         public decimal? Other { get; set; }
         [Display(Name = "Total Expenses")]
-        [Required]
         public decimal? TotalExpenses { get; set; }
     }
 }
