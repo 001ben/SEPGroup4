@@ -20,7 +20,6 @@
     <div class="col-md-offset-1 col-md-10">
         <hr />
         <div class="form-horizontal">
-            @*<h4>Applicant Details</h4>*@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(html => html.ApplicationId)
             <div class="row">
@@ -28,8 +27,8 @@
                     @Html.LabelFor(model => model.ApplicantType, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EnumRadioButtonsFor(model => model.ApplicantType)
-                        </div>
-                        <div class="col-md-10 col-md-offset-2">
+                    </div>
+                    <div class="col-md-10 col-md-offset-2">
                         @Html.ValidationMessageFor(model => model.ApplicantType, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -56,14 +55,14 @@
                         @Html.EditorFor(model => model.SchoolUnit, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.SchoolUnit, "", new { @class = "text-danger" })
                     </div>
-               
+
                     @Html.LabelFor(model => model.Supervisor, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.Supervisor, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Supervisor, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                </div>
+            </div>
             <div class="row">
                 <div class="form-group">
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -71,15 +70,15 @@
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
-                
+
                     @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-3">
                         @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                </div>
-        
+            </div>
+
             <div class="row">
                 <div class="form-group">
                     @Html.LabelFor(model => model.FirstApplicationThisYear, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -90,7 +89,7 @@
                         @Html.ValidationMessageFor(model => model.FirstApplicationThisYear, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                </div>
+            </div>
             <div class="row">
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -99,7 +98,7 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     </div>
 }
 

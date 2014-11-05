@@ -32,5 +32,14 @@ namespace SEPGroup4App.ViewModels
         [Phone]
         [RegularExpression(@"^\({0,1}((0|\+61)(2|4|3|7|8)){0,1}\){0,1}(\ |-){0,1}[0-9]{2}(\ |-){0,1}[0-9]{2}(\ |-){0,1}[0-9]{1}(\ |-){0,1}[0-9]{3}$", ErrorMessage = "Please enter a valid Australian phone number.")]
         public string Phone { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Compare("Password")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        public string ComparePassword { get; set; }
     }
 }
