@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="FileManager.FileManager" CodeBehind="FileManager.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FileManagerNs.FileManager" CodeBehind="FileManager.svc.cs" %>

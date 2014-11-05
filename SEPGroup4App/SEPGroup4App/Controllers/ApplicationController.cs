@@ -234,11 +234,15 @@ namespace SEPGroup4App.Controllers
                 ApplicationData.Entry(travelDetails).State = System.Data.Entity.EntityState.Modified;
                 ApplicationData.SaveChanges();
 
-                FileManagerClient fileClient = new FileManagerClient();
-                string result = fileClient.UploadFiles(new ApplicationFileCollection {
-                    Files = GetFiles().ToArray(),
-                    ApplicationId = travelDetails.ApplicationId
-                });
+                var files = GetFiles().ToArray();
+                if(files.Length > 0)
+                {
+                    FileManagerClient fileClient = new FileManagerClient();
+                    fileClient.UploadFiles(new ApplicationFileCollection {
+                        Files = files,
+                        ApplicationId = travelDetails.ApplicationId
+                    });
+                }
 
                 return RedirectToAction("FundingDetails", new { applicationId = travelDetails.ApplicationId });
             }
@@ -252,6 +256,7 @@ namespace SEPGroup4App.Controllers
             foreach(string inputName in Request.Files)
             {
                 var f = Request.Files.Get(inputName);
+                if (f.ContentLength == 0) continue;
                 byte[] data = new byte[f.ContentLength];
                 f.InputStream.Read(data, 0, f.ContentLength);
 
