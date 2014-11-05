@@ -362,7 +362,7 @@ namespace SEPGroup4App.Controllers
                 #if(DEBUG)
                     return true;
                 #else
-                    return false
+                    return false;
                 #endif
             }
         }
