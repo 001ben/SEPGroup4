@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using SEPGroup4App.Models;
 using SEPGroup4App.ViewModels;
 
 namespace SEPGroup4App.Controllers
