@@ -132,7 +132,7 @@ namespace SEPGroup4App.Helpers
                         propertyName + "-" + enumValue.Name,
                         propertyName,
                         enumValue.Value,
-                        htmlHelper.ValueFor(expression).ToHtmlString() == enumValue.Name ? " checked=\"checked\"" : "");
+                        expression.Compile()(htmlHelper.ViewData.Model).ToString() == enumValue.Name ? " checked=\"checked\"" : "");
                 default:
                     return "";
             }

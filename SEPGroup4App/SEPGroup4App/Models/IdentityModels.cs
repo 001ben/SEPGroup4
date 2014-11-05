@@ -21,7 +21,7 @@ namespace SEPGroup4App.Models
     public class AuthenticationDbContext : IdentityDbContext<ApplicationUser>
     {
         public AuthenticationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("AuthDbEntities", throwIfV1Schema: false)
         {
         }
 

@@ -165,6 +165,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AuthMigrations\201411050738407_Initial.cs" />
+    <Compile Include="AuthMigrations\201411050738407_Initial.Designer.cs">
+      <DependentUpon>201411050738407_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthMigrations\Configuration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
@@ -210,6 +215,10 @@
     <Content Include="App_Data\ApplicationDb.mdf" />
     <Content Include="App_Data\ApplicationDb_log.ldf">
       <DependentUpon>ApplicationDb.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\AuthDb.mdf" />
+    <Content Include="App_Data\AuthDb_log.ldf">
+      <DependentUpon>AuthDb.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\UserDb.mdf" />
     <Content Include="App_Data\UserDb_log.ldf">
@@ -316,6 +325,9 @@
     <Content Include="Views\Application\Submitted.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AuthMigrations\201411050738407_Initial.resx">
+      <DependentUpon>201411050738407_Initial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserMigrations\201411040409335_Initial.resx">
       <DependentUpon>201411040409335_Initial.cs</DependentUpon>
     </EmbeddedResource>

@@ -24,5 +24,14 @@ namespace SEPGroup4App.ViewModels
         public string SchoolUnit { get; set; }
         public string Supervisor { get; set; }
         public string Phone { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Compare("Password")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        public string ComparePassword { get; set; }
     }
 }
