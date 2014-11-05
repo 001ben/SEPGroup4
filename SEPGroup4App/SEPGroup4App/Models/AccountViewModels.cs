@@ -49,9 +49,8 @@ namespace SEPGroup4App.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UTS ID")]
+        public string StaffStudentId { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
