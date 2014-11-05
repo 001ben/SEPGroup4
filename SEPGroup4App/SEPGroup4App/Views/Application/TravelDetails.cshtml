@@ -129,6 +129,8 @@
                             @Html.LabelFor(model => model.Quality, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.EnumRadioButtonsFor(model => model.Quality)
+                                </div>
+                             <div class="col-md-4">
                                 @Html.ValidationMessageFor(model => model.Quality, "", new { @class = "text-danger" })
                             </div>
                         </div>

@@ -28,6 +28,8 @@
                     @Html.LabelFor(model => model.ApplicantType, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EnumRadioButtonsFor(model => model.ApplicantType)
+                        </div>
+                        <div class="col-md-10 col-md-offset-2">
                         @Html.ValidationMessageFor(model => model.ApplicantType, "", new { @class = "text-danger" })
                     </div>
                 </div>
