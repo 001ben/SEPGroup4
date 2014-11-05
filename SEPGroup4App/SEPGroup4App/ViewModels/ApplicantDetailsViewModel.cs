@@ -13,18 +13,28 @@ namespace SEPGroup4App.ViewModels
         public int? ApplicationId { get; set; }
 
         [Display(Name="First Name")]
+        [Required]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
+        [Required]
         public string LastName { get; set; }
         [Display(Name = "School/Unit")]
+        [Required]
         public string SchoolUnit { get; set; }
+        [Required]
         public string Supervisor { get; set; }
+        [EmailAddress]
+        [Required]
         public string Email { get; set; }
         [Display(Name = "Phone Number")]
+        [Phone]
+        [Required]
         public string PhoneNumber { get; set; }
         [Display(Name = "Applicant Type")]
+        [Required]
         public ApplicantType? ApplicantType { get; set; }
         [Display(Name = "Is this your first application this year?")]
+        [Required]
         public bool FirstApplicationThisYear { get; set; }
     }
 }
