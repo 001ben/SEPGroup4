@@ -9,10 +9,14 @@ namespace SEPGroup4App.Models
     public class UserDBEntities : DbContext
     {
         public UserDBEntities()
-            :base("UserDBEntities")
+            : base("UserDBEntities")
+        { }
+            public static UserDBEntities Create()
         {
-
+            return new UserDBEntities();
         }
+
+        
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Applicant> Applicants { get; set; }

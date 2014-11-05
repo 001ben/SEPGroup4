@@ -164,6 +164,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -186,15 +187,26 @@
     <Compile Include="Models\User\UserDBEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UserMigrations\201411040409335_Initial.cs" />
+    <Compile Include="UserMigrations\201411040409335_Initial.Designer.cs">
+      <DependentUpon>201411040409335_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMigrations\Configuration.cs" />
     <Compile Include="ViewModels\ApplicantDetailsViewModel.cs" />
+    <Compile Include="ViewModels\FundingDetailsViewModel.cs" />
     <Compile Include="ViewModels\HeaderSections.cs" />
     <Compile Include="ViewModels\TravelDetailsViewModel.cs" />
-    <Compile Include="ViewModels\FundingDetailsViewModel.cs" />
+    <Compile Include="ViewModels\UserCreateViewModel.cs" />
+    <Compile Include="ViewModels\UserListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ApplicationDb.mdf" />
     <Content Include="App_Data\ApplicationDb_log.ldf">
       <DependentUpon>ApplicationDb.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\UserDb.mdf" />
+    <Content Include="App_Data\UserDb_log.ldf">
+      <DependentUpon>UserDb.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
@@ -275,6 +287,13 @@
     <Content Include="Views\Application\FundingDetails.cshtml" />
     <Content Include="Views\Application\HeaderSections.cshtml" />
     <Content Include="Views\Shared\ApplicationError.cshtml" />
+    <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\Administration\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserMigrations\201411040409335_Initial.resx">
+      <DependentUpon>201411040409335_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ApplicationMigrations\201411040247378_InitialApplications.resx">
@@ -288,6 +307,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\ApplicationViewModels\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
