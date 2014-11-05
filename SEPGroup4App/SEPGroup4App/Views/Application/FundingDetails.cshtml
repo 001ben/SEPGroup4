@@ -163,11 +163,27 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $('#submit-button').click(function () {
-            if(confirm("Are you sure you want to submit your application? You may not re-submit after submission"))
-            {
-                $('#funding-form').submit();
-            }
+
+        $(function () {
+            $('#submit-button').click(function () {
+                if(confirm("Are you sure you want to submit your application? You may not re-submit after submission"))
+                {
+                    $('#funding-form').submit();
+                }
+            });
+
+            var valueFields = $('#Other, #CarMileage, #Airfare, #LocalFares, #Meals, #ConferenceFees, #Accomodation');
+            
+            valueFields.change(function () {
+                var total = 0.00;
+                valueFields.each(function (i, e) {
+                    var f = parseFloat($(e).val());
+                    if (!isNaN(f)) {
+                        total += f;
+                    }
+                });
+                $('#TotalExpenses').val(total.toFixed(2));
+            });
         });
     </script>
 }
