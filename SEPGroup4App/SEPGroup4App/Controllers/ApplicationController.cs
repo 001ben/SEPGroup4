@@ -14,6 +14,7 @@ using SEPGroup4App.Helpers;
 
 namespace SEPGroup4App.Controllers
 {
+    [Authorize]
     public class ApplicationController : Controller
     {
         public ApplicationDBEntities ApplicationData

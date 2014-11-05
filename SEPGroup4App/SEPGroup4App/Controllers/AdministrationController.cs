@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SEPGroup4App.Controllers
 {
+    [Authorize]
     public class AdministrationController : Controller
     {
         public UserDBEntities UserData

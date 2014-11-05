@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -36,7 +37,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Manage Users", "Index", "Administration")</li>
+                    @if(User.Identity.GetUserName() == "000000")
+                    {
+                        <li>@Html.ActionLink("Manage Users", "Index", "Administration")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
