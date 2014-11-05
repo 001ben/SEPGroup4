@@ -1,5 +1,6 @@
 ﻿using SEPGroup4App.ViewModels;
 using System;
+using Microsoft.AspNet.Identity;
 using SEPGroup4App.FileManager;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,21 @@ namespace SEPGroup4App.Controllers
             }
         }
 
+        public UserDBEntities UserData
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Get<UserDBEntities>();
+            }
+        }
+
         // GET: Application
         public ActionResult Index()
         {
             // Create new application
             Application app = new Application()
             {
+                StaffStudentId = User.Identity.GetUserName(),
             };
 
             // Add to context
@@ -58,11 +68,28 @@ namespace SEPGroup4App.Controllers
             // Decide whether required to create applicant details or get current details
             if (application.ApplicantDetails == null)
             {
-                // Create a new applicant details section for the application
-                application.ApplicantDetails = new ApplicantDetails()
+                // Get the applicant using the logged in user's user name
+                string userName = User.Identity.GetUserName();
+                var applicant = UserData.Applicants.FirstOrDefault(a => a.StaffStudentID == userName);
+
+                // Prefill if there is an applicant
+                if(applicant != null)
                 {
-                    // Prefill applicant details with current user details
-                };
+                    application.ApplicantDetails = new ApplicantDetails
+                    {
+                        Email = applicant.Email,
+                        FirstName = applicant.FirstName,
+                        LastName = applicant.Surname,
+                        SchoolUnit = applicant.SchoolUnit,
+                        PhoneNumber = applicant.Phone,
+                        Supervisor = applicant.Supervisor
+                    };
+                }
+                else
+                {
+                    // Create a new applicant details section for the application
+                    application.ApplicantDetails = new ApplicantDetails();
+                }
 
                 // Create a new application
                 ApplicationData.Entry(application).State = System.Data.Entity.EntityState.Modified;
@@ -106,6 +133,7 @@ namespace SEPGroup4App.Controllers
                         .FirstOrDefault();
 
                     // Update the applicant details section
+                    applicantDetails.ApplicantType = model.ApplicantType;
                     applicantDetails.Email = model.Email;
                     applicantDetails.FirstApplicationThisYear = model.FirstApplicationThisYear;
                     applicantDetails.FirstName = model.FirstName;
@@ -353,6 +381,12 @@ namespace SEPGroup4App.Controllers
 
                 // Update funding details section in database
                 ApplicationData.Entry(fundingDetails).State = System.Data.Entity.EntityState.Modified;
+                ApplicationData.SaveChanges();
+
+                var application = fundingDetails.Application;
+                application.Submitted = true;
+                application.SubmittedOn = DateTime.Now;
+                ApplicationData.Entry(application).State = System.Data.Entity.EntityState.Modified;
                 ApplicationData.SaveChanges();
 
                 // Redirect to FundingDetails view until logic is added for application submission

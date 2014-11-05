@@ -1,13 +1,31 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
+        var userData = Context.GetOwinContext().Get<SEPGroup4App.Models.UserDBEntities>();
+
+        string userName = User.Identity.GetUserName();
+        
+        string displayName = 
+            userData
+            .Applicants
+            .Where(a => a.StaffStudentID == userName)
+            .Select(a => a.UserName)
+            .FirstOrDefault();
+
+        if (string.IsNullOrEmpty(displayName))
+        {
+            displayName = userName;
+        }
+    
+    
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello " + displayName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

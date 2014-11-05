@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using SEPGroup4App.ViewModels;
+using System.Threading.Tasks;
 
 namespace SEPGroup4App.Controllers
 {
@@ -19,6 +20,15 @@ namespace SEPGroup4App.Controllers
                 return HttpContext.GetOwinContext().Get<UserDBEntities>();
             }
         }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Get<ApplicationUserManager>();
+            }
+        }
+
         // GET: Administration
         public ActionResult Index()
         {
@@ -44,7 +54,7 @@ namespace SEPGroup4App.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(UserCreateViewModel model)
+        public async Task<ActionResult> Create(UserCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -54,14 +64,20 @@ namespace SEPGroup4App.Controllers
                     UserName = model.UserName,
                     FirstName = model.FirstName,
                     Surname = model.Surname,
-                    Email=model.Email,
+                    Email = model.Email,
                     SchoolUnit = model.SchoolUnit,
                     Supervisor = model.Supervisor,
                     Phone = model.Phone
                 };
 
                 UserData.Applicants.Add(applicant);
-                UserData.SaveChanges();
+                await UserData.SaveChangesAsync();
+
+                await UserManager.CreateAsync(new ApplicationUser
+                    {
+                        UserName = model.StaffStudentID
+                    }, model.Password);
+
                 return RedirectToAction("Index", "Administration");
             }
 
