@@ -11,9 +11,9 @@
 </style>
 
 
-<div class="row loginbox">
+<div class="row loginbox col-md-8 col-md-offset-2">
     <h1 class="text-primary"><span class="glyphicon glyphicon-log-in"></span> Login</h1>
-    <div class="col-md-12">
+    <div>
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -51,7 +51,7 @@
         </section>
     </div>
 </div>
-
+<div class="clearfix"></div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
