@@ -276,6 +276,11 @@ namespace SEPGroup4App.Controllers
                 return RedirectToAction("FundingDetails", new { applicationId = travelDetails.ApplicationId });
             }
 
+            if(AttachedDocuments != null && AttachedDocuments.Length > 1)
+            {
+                model.AttachedDocuments = AttachedDocuments.Aggregate((a, b) => a | b);
+            }
+
             // Return view with errors
             return View(model);
         }

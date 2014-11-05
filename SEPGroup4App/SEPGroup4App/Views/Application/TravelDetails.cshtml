@@ -196,7 +196,7 @@
                 <div class="tab-pane" id="paper-information">
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PaperTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.PaperTitle, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.PaperTitle, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PaperTitle, "", new { @class = "text-danger" })
@@ -224,7 +224,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PublicationImportanceAndQuality, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.PublicationImportanceAndQuality, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.PublicationImportanceAndQuality, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PublicationImportanceAndQuality, "", new { @class = "text-danger" })

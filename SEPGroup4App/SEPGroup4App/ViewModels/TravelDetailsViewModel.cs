@@ -72,7 +72,7 @@ namespace SEPGroup4App.ViewModels
         [Required]
         public bool PaperAccepted { get; set; }
         [Display(Name = "Attached Documents")]
-        [Required]
+        
         public AttachedDocuments? AttachedDocuments { get; set; }
         [Display(Name = "HERDC Points Awarded?")]
         [Required]

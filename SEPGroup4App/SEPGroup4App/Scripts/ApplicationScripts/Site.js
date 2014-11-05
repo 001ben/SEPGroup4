@@ -30,4 +30,24 @@
         }
         return result;
     });
+
+    // Get a list of the parent tab panes of an field validation error classes (fields with an error)
+    var errorPanes = $('.field-validation-error').parents('.tab-pane');
+
+    if (errorPanes.length > 0) {
+        // Go through the form nav tabs and compare the href of the a element to the id of the tab panes
+        $('.nav-tabs li a').each(function (i, a) {
+            var continuing = true;
+            errorPanes.each(function (i, t) {
+                if ($(a).attr('href') == '#' + $(t).attr('id')) {
+                    // show tab pane
+                    $(a).tab('show');
+                    // Set continuing to false so we break out
+                    continuing = false;
+                }
+                return continuing;
+            });
+            return continuing;
+        });
+    }
 });

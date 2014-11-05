@@ -59,27 +59,37 @@ namespace SEPGroup4App.Controllers
         {
             if (ModelState.IsValid)
             {
-                Applicant applicant = new Applicant
+                var result = await UserManager.CreateAsync(new ApplicationUser
                 {
-                    StaffStudentID = model.StaffStudentID,
-                    UserName = model.UserName,
-                    FirstName = model.FirstName,
-                    Surname = model.Surname,
-                    Email = model.Email,
-                    SchoolUnit = model.SchoolUnit,
-                    Supervisor = model.Supervisor,
-                    Phone = model.Phone
-                };
+                    UserName = model.StaffStudentID
+                }, model.Password);
 
-                UserData.Applicants.Add(applicant);
-                await UserData.SaveChangesAsync();
-
-                await UserManager.CreateAsync(new ApplicationUser
+                if(!result.Succeeded)
+                {
+                    foreach(var e in result.Errors)
                     {
-                        UserName = model.StaffStudentID
-                    }, model.Password);
+                        ModelState.AddModelError("", e);
+                    }
+                }
+                else
+                {
+                    Applicant applicant = new Applicant
+                    {
+                        StaffStudentID = model.StaffStudentID,
+                        UserName = model.UserName,
+                        FirstName = model.FirstName,
+                        Surname = model.Surname,
+                        Email = model.Email,
+                        SchoolUnit = model.SchoolUnit,
+                        Supervisor = model.Supervisor,
+                        Phone = model.Phone
+                    };
 
-                return RedirectToAction("Index", "Administration");
+                    UserData.Applicants.Add(applicant);
+                    await UserData.SaveChangesAsync();
+                    
+                    return RedirectToAction("Index", "Administration");
+                }
             }
 
             return View(model);
