@@ -30,8 +30,8 @@ namespace SEPGroup4App.Controllers
                     Email = u.Email,
                     StaffStudentID = u.StaffStudentID,
                     UserID = u.UserID,
-                    UserName = u is Applicant ? 
-                    (u as Applicant).FirstName + " " + (u as Applicant).Surname : 
+                    UserName = u is Applicant ?
+                    (u as Applicant).FirstName + " " + (u as Applicant).Surname :
                     u.UserName
                 });
 
@@ -40,7 +40,33 @@ namespace SEPGroup4App.Controllers
 
         public ActionResult Create()
         {
+
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(UserCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Applicant applicant = new Applicant
+                {
+                    StaffStudentID = model.StaffStudentID,
+                    UserName = model.UserName,
+                    FirstName = model.FirstName,
+                    Surname = model.Surname,
+                    Email=model.Email,
+                    SchoolUnit = model.SchoolUnit,
+                    Supervisor = model.Supervisor,
+                    Phone = model.Phone
+                };
+
+                UserData.Applicants.Add(applicant);
+                UserData.SaveChanges();
+                return RedirectToAction("Index", "Administration");
+            }
+
+            return View(model);
         }
     }
 }

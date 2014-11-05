@@ -10,6 +10,7 @@ namespace SEPGroup4App.ViewModels
     {
 
         [Display(Name = "UTS ID")]
+        [Required]
         public string StaffStudentID { get; set; }
         [Display(Name = "User Name")]
         public string UserName { get; set; }
