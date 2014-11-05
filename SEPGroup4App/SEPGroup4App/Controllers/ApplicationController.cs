@@ -1,5 +1,6 @@
 ﻿using SEPGroup4App.ViewModels;
 using System;
+using SEPGroup4App.FileManager;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,11 +29,6 @@ namespace SEPGroup4App.Controllers
             // Create new application
             Application app = new Application()
             {
-                // May pre-create sections, or leave blank for prefill
-                //ApplicantDetails = new ApplicantDetails(),
-                //FundingDetails = new FundingDetails(),
-                //TravelDetails = new TravelDetails(),
-                // StaffStudentId = current user's id
             };
 
             // Add to context
@@ -233,11 +229,34 @@ namespace SEPGroup4App.Controllers
                 ApplicationData.Entry(travelDetails).State = System.Data.Entity.EntityState.Modified;
                 ApplicationData.SaveChanges();
 
+                FileManagerClient fileClient = new FileManagerClient();
+                string result = fileClient.UploadFiles(new ApplicationFileCollection {
+                    Files = GetFiles().ToArray(),
+                    ApplicationId = travelDetails.ApplicationId
+                });
+
                 return RedirectToAction("FundingDetails", new { applicationId = travelDetails.ApplicationId });
             }
 
             // Return view with errors
             return View(model);
+        }
+
+        private IEnumerable<ApplicationFile> GetFiles()
+        {
+            foreach(string inputName in Request.Files)
+            {
+                var f = Request.Files.Get(inputName);
+                byte[] data = new byte[f.ContentLength];
+                f.InputStream.Read(data, 0, f.ContentLength);
+
+                yield return new ApplicationFile()
+                {
+                    Data = data,
+                    FileName = f.FileName,
+                    MimeType = f.ContentType
+                };
+            }
         }
 
         /// <summary>
