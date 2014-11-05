@@ -89,8 +89,8 @@
                             @Html.LabelFor(model => model.Airfare, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.Airfare, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.Airfare, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.Airfare, "", new { @class = "text-danger" })
                             </div>
@@ -98,8 +98,8 @@
                             @Html.LabelFor(model => model.Accomodation, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.Accomodation, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.Accomodation, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.Accomodation, "", new { @class = "text-danger" })
                             </div>
@@ -110,16 +110,16 @@
                             @Html.LabelFor(model => model.ConferenceFees, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.ConferenceFees, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.ConferenceFees, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.ConferenceFees, "", new { @class = "text-danger" })
                             </div>
                             @Html.LabelFor(model => model.Meals, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.Meals, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.Meals, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.Meals, "", new { @class = "text-danger" })
                             </div>
@@ -130,8 +130,8 @@
                             @Html.LabelFor(model => model.LocalFares, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.LocalFares, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.LocalFares, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.LocalFares, "", new { @class = "text-danger" })
                             </div>
@@ -139,8 +139,8 @@
                             @Html.LabelFor(model => model.CarMileage, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.CarMileage, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.CarMileage, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.CarMileage, "", new { @class = "text-danger" })
                             </div>
@@ -151,8 +151,8 @@
                             @Html.LabelFor(model => model.Other, htmlAttributes: new { @class = "control-label col-md-2 required" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.Other, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.Other, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.Other, "", new { @class = "text-danger" })
                             </div>
@@ -163,8 +163,8 @@
                             @Html.LabelFor(model => model.TotalExpenses, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    @Html.EditorFor(model => model.TotalExpenses, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                <span class="input-group-addon">$</span>
+                                @Html.EditorFor(model => model.TotalExpenses, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                 </div>
                                 @Html.ValidationMessageFor(model => model.TotalExpenses, "", new { @class = "text-danger" })
                             </div>
@@ -189,10 +189,26 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
+
+        $(function () {
         $('#submit-button').click(function () {
             if (confirm("Are you sure you want to submit your application? You may not re-submit after submission")) {
                 $('#funding-form').submit();
             }
+            });
+
+            var valueFields = $('#Other, #CarMileage, #Airfare, #LocalFares, #Meals, #ConferenceFees, #Accomodation');
+            
+            valueFields.change(function () {
+                var total = 0.00;
+                valueFields.each(function (i, e) {
+                    var f = parseFloat($(e).val());
+                    if (!isNaN(f)) {
+                        total += f;
+                    }
+        });
+                $('#TotalExpenses').val(total.toFixed(2));
+            });
         });
     </script>
 }
